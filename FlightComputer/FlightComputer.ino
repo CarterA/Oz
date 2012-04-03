@@ -24,18 +24,6 @@ OneWire oneWire(OneWireBus);
 DallasTemperature tempSensors(&oneWire);
 unsigned long tempDelay;
 
-void setupAccelerometer();
-void setupMagnetometer();
-void setupGyroscope();
-void setupTemperatureSensors();
-void setupBarometer();
-void writeAccelerometerData();
-void writeMagnetometerData();
-void writeGyroscopeData();
-void writeTemperatureData();
-void writeBarometerData();
-void writeHumidityData();
-
 void setup() {
   Serial.begin(Baud);
   delay(4000);
