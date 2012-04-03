@@ -17,8 +17,6 @@ int    OneWireBus         = 2;
 int    ExternalTempSensor = 0;
 int    InternalTempSensor = 1;
 int    HIH4030Pin         = 0;
-float  HIH4030Voltage     = 3.3;
-float  ZeroPercentVoltage = 0.8;
 int    BMP085BasePressure = 101320;
 
 // OneWire & Dallas Temperature Sensor setup
@@ -169,6 +167,7 @@ void writeHumidityData() {
   
   //  
   //  Here is how to calculate the actual %RH:
+  //    float HIH4030Voltage = 3.3;
   //    float voltage = rawVal/1023.0 * HIH4030Voltage;
   //    float sensorRH = 161.0 * voltage/HIH4030Voltage - 25.8;
   //    float trueRH = sensorRH/(1.0546 - 0.00216 * temp);
