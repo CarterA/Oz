@@ -12,13 +12,14 @@ ITG3200 gyro;
 BMP085 baro;
 
 // Definitions
-#define ONE_WIRE_BUS 2 // Digital Pin 2
-float ZeroPercentVoltage = 0.8;
-int   HIH4030Pin         = 0;
-float HIH4030Voltage     = 3.3;
+int    OneWireBus         = 2;
+int    HIH4030Pin         = 0;
+float  HIH4030Voltage     = 3.3;
+float  ZeroPercentVoltage = 0.8;
+int    BMP085BasePressure = 101320;
 
 // OneWire & Dallas Temperature Sensor setup
-OneWire oneWire(ONE_WIRE_BUS);
+OneWire oneWire(OneWireBus);
 DallasTemperature tempSensors(&oneWire);
 unsigned long tempDelay;
 
@@ -169,7 +170,7 @@ void writeBarometerData() {
   Serial.print(",");
   Serial.print(baro.readPressure());
   Serial.print(",");
-  Serial.print(baro.readAltitude(101320));
+  Serial.print(baro.readAltitude(BMP085BasePressure));
 }
 
 void writeHumidityData() {
