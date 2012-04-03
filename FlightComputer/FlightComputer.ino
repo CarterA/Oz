@@ -14,6 +14,8 @@ BMP085 baro;
 // Definitions
 int    Baud               = 115200;
 int    OneWireBus         = 2;
+int    ExternalTempSensor = 0;
+int    InternalTempSensor = 1;
 int    HIH4030Pin         = 0;
 float  HIH4030Voltage     = 3.3;
 float  ZeroPercentVoltage = 0.8;
@@ -148,9 +150,9 @@ void writeGyroscopeData() {
 }
 
 void writeTemperatureData() {
-  Serial.print(tempSensors.getTempCByIndex(0));
+  Serial.print(tempSensors.getTempCByIndex(ExternalTempSensor));
   Serial.print(",");
-  Serial.print(tempSensors.getTempCByIndex(1));
+  Serial.print(tempSensors.getTempCByIndex(InternalTempSensor));
 }
 
 void writeBarometerData() {
@@ -162,7 +164,7 @@ void writeBarometerData() {
 }
 
 void writeHumidityData() {
-  float temp = tempSensors.getTempCByIndex(0);
+  float temp = tempSensors.getTempCByIndex(InternalTempSensor);
   float rawVal = analogRead(HIH4030Pin);
   float voltage = rawVal/1023.0 * HIH4030Voltage;
   float sensorRH = 161.0 * voltage/HIH4030Voltage - 25.8;
