@@ -166,8 +166,14 @@ void writeBarometerData() {
 void writeHumidityData() {
   float temp = tempSensors.getTempCByIndex(InternalTempSensor);
   float rawVal = analogRead(HIH4030Pin);
-  float voltage = rawVal/1023.0 * HIH4030Voltage;
-  float sensorRH = 161.0 * voltage/HIH4030Voltage - 25.8;
-  float trueRH = sensorRH/(1.0546 - 0.00216 * temp);
-  Serial.print(trueRH);
+  
+  //  
+  //  Here is how to calculate the actual %RH:
+  //    float voltage = rawVal/1023.0 * HIH4030Voltage;
+  //    float sensorRH = 161.0 * voltage/HIH4030Voltage - 25.8;
+  //    float trueRH = sensorRH/(1.0546 - 0.00216 * temp);
+  //  It's not worth the effort to do this during the flight.
+  //  
+  
+  Serial.print(rawVal);
 }
