@@ -39,12 +39,14 @@ void setup() {
   delay(4000);
   Serial.println();
   Serial.println("-+-+- Oz2 -+-+-");
+  Serial.println("ms,accX,accY,accZ,magX,magY,magZ,gyrX,gyrY,gyrZ,gyrTem,barTem,barPres,barAlt,tem1,tem2,hum");
   Wire.begin();
   setupAccelerometer();
   setupMagnetometer();
   setupGyroscope();
   setupTemperatureSensors();
   setupBarometer();
+  delay(1000);
 }
 
 void loop() {
