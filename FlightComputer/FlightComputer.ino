@@ -6,10 +6,10 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-ADXL345 accel;
+ADXL345  accel;
 HMC5883L mag;
-ITG3200 gyro;
-BMP085 baro;
+ITG3200  gyro;
+BMP085   baro;
 
 // Definitions
 int    Baud               = 115200;
