@@ -12,6 +12,7 @@ ITG3200 gyro;
 BMP085 baro;
 
 // Definitions
+int    Baud               = 115200;
 int    OneWireBus         = 2;
 int    HIH4030Pin         = 0;
 float  HIH4030Voltage     = 3.3;
@@ -36,11 +37,10 @@ void writeBarometerData();
 void writeHumidityData();
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(Baud);
   delay(4000);
   Serial.println();
-  Serial.println("-+-+- Oz2 -+-+-");
-  Serial.println("ms,accX,accY,accZ,magX,magY,magZ,gyrX,gyrY,gyrZ,gyrTem,barTem,barPres,barAlt,tem1,tem2,hum");
+  Serial.println("-+-+-+- Oz -+-+-+-");
   Wire.begin();
   setupAccelerometer();
   setupMagnetometer();
