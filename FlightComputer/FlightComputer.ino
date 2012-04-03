@@ -63,7 +63,6 @@ void loop() {
   writeHumidityData();
   
   Serial.println();
-  delay(100);
   
 }
 
