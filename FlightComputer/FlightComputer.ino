@@ -2,7 +2,7 @@
 #include <ADXL345.h>  // Accelerometer
 #include <HMC5883L.h> // Magnetometer
 #include <ITG3200.h>  // Gyroscope
-#include <BMP085.h> // Barometer
+#include <BMP085.h>   // Barometer
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
@@ -12,12 +12,12 @@ ITG3200  gyro;
 BMP085   baro;
 
 // Definitions
-int    Baud               = 115200;
-int    OneWireBus         = 2;
-int    ExternalTempSensor = 0;
-int    InternalTempSensor = 1;
-int    HIH4030Pin         = 0;
-int    BMP085BasePressure = 101320;
+int Baud               = 115200;
+int OneWireBus         = 2;
+int ExternalTempSensor = 0;
+int InternalTempSensor = 1;
+int HIH4030Pin         = 0;
+int BMP085BasePressure = 101320;
 
 // OneWire & Dallas Temperature Sensor setup
 OneWire oneWire(OneWireBus);
