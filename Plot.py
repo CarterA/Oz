@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 #data = [line for line in f]
 #data = zip(*data)
 
-data = csv.DictReader(open('Data/Night.csv', 'r'), delimiter=",")
+data = data = [line for line in f if len(line) == 17]
 data = zip(*data)
 print data['time'][0]
 
