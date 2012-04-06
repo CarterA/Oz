@@ -7,16 +7,12 @@ import matplotlib.pyplot as plt
 # CSV file columns:
 # 0 , 1  , 2  , 3  , 4  , 5  , 6  , 7  , 8  , 9  , 10   , 11   , 12    , 13   , 14 , 15 , 16
 # ms,accX,accY,accZ,magX,magY,magZ,gyrX,gyrY,gyrZ,gyrTem,barTem,barPres,barAlt,tem1,tem2,hum
-#f = csv.reader(open('Data/Night.csv','r'), delimiter=",", quoting=csv.QUOTE_NONE)
-#data = [line for line in f]
-#data = zip(*data)
 
+f = csv.reader(open('Data/Night.csv','r'))
 data = data = [line for line in f if len(line) == 17]
 data = zip(*data)
-print data['time'][0]
 
 # Convert ms to seconds for display purposes
-'''
 data[0] = [float(t) / 60000 for t in data[0]]
 time_label = 'Time (minutes)'
 
@@ -68,4 +64,3 @@ accPlot.set_xlabel(time_label)
 accPlot.set_ylabel('Accleration (G forces)')
 
 plt.show()
-'''
