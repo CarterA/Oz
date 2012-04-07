@@ -12,12 +12,12 @@ ITG3200  gyro;
 BMP085   baro;
 
 // Definitions
-int Baud               = 115200;
-int OneWireBus         = 2;
-int ExternalTempSensor = 0;
-int InternalTempSensor = 1;
-int HIH4030Pin         = 0;
-int BMP085BasePressure = 101320;
+long Baud               = 115200;
+int  OneWireBus         = 2;
+int  ExternalTempSensor = 0;
+int  InternalTempSensor = 1;
+int  HIH4030Pin         = 0;
+int  BMP085BasePressure = 101320;
 
 // OneWire & Dallas Temperature Sensor setup
 OneWire oneWire(OneWireBus);
@@ -161,8 +161,8 @@ void writeBarometerData() {
 }
 
 void writeHumidityData() {
-  float temp = tempSensors.getTempCByIndex(InternalTempSensor);
-  float rawVal = analogRead(HIH4030Pin);
+  //float temp = tempSensors.getTempCByIndex(InternalTempSensor);
+  int rawVal = analogRead(HIH4030Pin);
   
   //  
   //  Here is how to calculate the actual %RH:
