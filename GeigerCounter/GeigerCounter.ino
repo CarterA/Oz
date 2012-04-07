@@ -4,9 +4,11 @@
 //  Based on the work of Aaron Weiss
 //
 
-const int Baud      = 9600;
-const int LEDPin    = 5;     // Status LED blinks for each count
-const int TimerLoad = 34000; //(256/8MHz)*(65536bits-34000)~=1.009s
+#include <TimerOne.h>
+
+long Baud      = 9600;
+int  LEDPin    = 5;      // Status LED blinks for each count
+long CountTime = 1000000; // 1 second, in microseconds
 
 volatile long counts = 0;
 
@@ -15,8 +17,7 @@ void incrementCount(void) {
   digitalWrite(LEDPin, HIGH);
 }
 
-ISR (TIMER1_OVF_vect) {
-  TCNT1 = TimerLoad;
+void printCount(void) {
   Serial.println(counts);
   counts = 0;
 }
@@ -25,10 +26,8 @@ void setup() {
   Serial.begin(Baud);
   noInterrupts();
   attachInterrupt(INT0, incrementCount, FALLING);
-  TCCR1A = 0x00;
-  TCCR1B |= (1<<CS12);
-  TIMSK1 |= (1<<TOIE1);
-  TCNT1 = TimerLoad; // (256/8MHz)*(65536bits-34000)~=1.009s
+  Timer1.initialize(CountTime);
+  Timer1.attachInterrupt(printCount);
   pinMode(LEDPin, OUTPUT);
   interrupts();
   delay(1200);
