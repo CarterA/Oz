@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 # 0 , 1  , 2  , 3  , 4  , 5  , 6  , 7  , 8  , 9  , 10   , 11   , 12    , 13 , 14 , 15
 # ms,accX,accY,accZ,magX,magY,magZ,gyrX,gyrY,gyrZ,gyrTem,barTem,barPres,tem1,tem2,hum
 
-f = csv.reader(open('Data/Night.csv','r'))
-data = data = [line for line in f if len(line) == 17]
+f = csv.reader(open('Data/Altitude.csv','r'))
+data = data = [line for line in f if len(line) == 16]
 data = zip(*data)
 
 # Convert ms to seconds for display purposes
@@ -22,8 +22,8 @@ fig = plt.figure(facecolor='white')
 temPlot = fig.add_subplot(221)
 temPlot.plot(data[0], data[10], 'b-', label='Gyroscope Temperature')
 temPlot.plot(data[0], data[11], 'g-', label='Barometer Temperature')
-temPlot.plot(data[0], data[13], 'r-', label='Temperature Probe 1')
-temPlot.plot(data[0], data[14], 'c-', label='Temperature Probe 2')
+temPlot.plot(data[0], data[13], 'r-', label='External Temperature')
+temPlot.plot(data[0], data[14], 'c-', label='Internal Temperature')
 temPlot.legend()
 temPlot.set_title('Temperature')
 temPlot.set_xlabel(time_label)
@@ -39,6 +39,8 @@ humPlot.set_ylabel('Relative Humidity (%)')
 # Pressure/Altitude Graph
 pressurePlot = fig.add_subplot(223)
 pressurePlotFormatter = matplotlib.ticker.ScalarFormatter(useOffset = False)
+seaLevelPressure = 101320;
+altitude = [(44330 * (1.0 - pow(float(a)/seaLevelPressure,0.1903)))/1000 for a in data[12]]
 data[12] = [float(p) / 101325 for p in data[12]] # pascals -> atm
 pressurePlot.plot(data[0], data[12], 'b-')
 pressurePlot.set_xlabel(time_label)
@@ -46,8 +48,6 @@ pressurePlot.set_ylabel('Pressure (atmospheres)')
 pressurePlot.yaxis.set_major_formatter(pressurePlotFormatter)
 pressurePlot.set_title('Pressure & Altitude')
 altitudePlot = pressurePlot.twinx()
-seaLevelPressure = 101320;
-altitude = [(44330 * (1.0 - pow(float(a)/seaLevelPressure,0.1903)))/1000 for a in data[12]]
 #data[13] = [float(a) / 1000 for a in data[13]]
 altitudePlot.plot(data[0], altitude, 'r-')
 altitudePlot.set_ylabel('Altitude (kilometers)')
