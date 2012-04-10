@@ -19,6 +19,7 @@ int  ExternalTempSensor = 0;
 int  InternalTempSensor = 1;
 int  HIH4030Pin         = 0;
 long BMP085BasePressure = 101320;
+long TempSensorDelay    = 94;
 
 // OneWire & Dallas Temperature Sensor setup
 OneWire oneWire(OneWireBus);
@@ -58,8 +59,8 @@ void loop() {
   
   unsigned long currentTime = millis();
   unsigned long elapsedTime = currentTime - startTime;
-  if (elapsedTime < tempDelay)
-    delay(tempDelay - elapsedTime);
+  if (elapsedTime < TempSensorDelay)
+    delay(TempSensorDelay - elapsedTime);
   writeTemperatureData();
   
   Serial.print(",");
@@ -94,22 +95,6 @@ void setupGyroscope() {
 
 void setupTemperatureSensors() {
   tempSensors.setWaitForConversion(false);
-  uint8_t resolution = tempSensors.getResolution();
-  switch (resolution) {
-    case 9:
-      tempDelay = 94;
-      break;
-    case 10:
-      tempDelay = 188;
-      break;
-    case 11:
-      tempDelay = 375;
-      break;
-    case 12:
-    default:
-      tempDelay = 750;
-      break;
-  }
   tempSensors.begin();
 }
 
