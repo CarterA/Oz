@@ -17,7 +17,7 @@ int  OneWireBus         = 2;
 int  ExternalTempSensor = 0;
 int  InternalTempSensor = 1;
 int  HIH4030Pin         = 0;
-int  BMP085BasePressure = 101320;
+long BMP085BasePressure = 101320;
 
 // OneWire & Dallas Temperature Sensor setup
 OneWire oneWire(OneWireBus);
