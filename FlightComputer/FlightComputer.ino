@@ -13,6 +13,7 @@ BMP085   baro;
 
 // Definitions
 long Baud               = 115200;
+int  LEDPin             = 12;
 int  OneWireBus         = 2;
 int  ExternalTempSensor = 0;
 int  InternalTempSensor = 1;
@@ -25,6 +26,7 @@ DallasTemperature tempSensors(&oneWire);
 unsigned long tempDelay;
 
 void setup() {
+  pinMode(LEDPin, OUTPUT);
   Serial.begin(Baud);
   delay(4000);
   Serial.println();
@@ -40,6 +42,7 @@ void setup() {
 
 void loop() {
   
+  digitalWrite(LEDPin, HIGH);
   unsigned long startTime = millis();
   tempSensors.requestTemperatures();
   Serial.print(startTime);
@@ -61,6 +64,8 @@ void loop() {
   
   Serial.print(",");
   writeHumidityData();
+  
+  digitalWrite(LEDPin, LOW);
   
   Serial.println();
   
