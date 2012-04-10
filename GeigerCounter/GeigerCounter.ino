@@ -1,5 +1,6 @@
 //
 //  Geiger Counter Firmware
+//  CCD Curiosity Balloon Satellite Project
 //  Copyright 2012 Carter Allen
 //  Based on the work of Aaron Weiss
 //

@@ -1,4 +1,10 @@
+#!/usr/bin/env python
 # -*- coding: utf8 -*-
+#
+#  Plot.py
+#  CCD Curiosity Balloon Satellite Project
+#  Copyright 2012 Carter Allen
+#
 
 import csv
 import matplotlib

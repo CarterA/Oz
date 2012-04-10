@@ -1,3 +1,9 @@
+//
+//  Flight Computer
+//  CCD Curiosity Balloon Satellite Project
+//  Copyright 2012 Carter Allen
+//
+
 #include <Wire.h>
 #include <ADXL345.h>  // Accelerometer
 #include <HMC5883L.h> // Magnetometer
