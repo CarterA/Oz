@@ -18,7 +18,6 @@ int  OneWireBus         = 2;
 int  ExternalTempSensor = 0;
 int  InternalTempSensor = 1;
 int  HIH4030Pin         = 0;
-long BMP085BasePressure = 101320;
 long TempSensorDelay    = 94;
 
 // OneWire & Dallas Temperature Sensor setup
@@ -146,8 +145,6 @@ void writeBarometerData() {
   Serial.print(baro.readTemperature());
   Serial.print(",");
   Serial.print(baro.readPressure());
-  Serial.print(",");
-  Serial.print(baro.readAltitude(BMP085BasePressure));
 }
 
 void writeHumidityData() {
