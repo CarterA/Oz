@@ -30,8 +30,9 @@ temPlot.set_xlabel(time_label)
 temPlot.set_ylabel(u'Temperature (‌‌\u00B0C)')
 
 # Humidity Graph
+humidities = [161.0 * (float(v)/1023.0 * 3.3)/3.3 - 25.8 for v in data[15]]
 humPlot = fig.add_subplot(222)
-humPlot.plot(data[0], data[15])
+humPlot.plot(data[0], humidities)
 humPlot.set_title('Relative Humidity')
 humPlot.set_xlabel(time_label)
 humPlot.set_ylabel('Relative Humidity (%)')
