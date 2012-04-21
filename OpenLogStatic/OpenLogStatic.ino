@@ -34,9 +34,9 @@ SerialPort<0, 600, 0> NewSerial;
 #define LOCATION_FILE_NUMBER_LSB	0x03
 #define LOCATION_FILE_NUMBER_MSB	0x04
 
-const uint32_t BAUD =    115200;
+const uint32_t BAUD =    9600;
 #define LOCAL_BUFF_SIZE  32
-#define MAX_LOOPS        225 // BAUD/8/LOCAL_BUFF_SIZE
+#define MAX_LOOPS        37 // BAUD/8/LOCAL_BUFF_SIZE
 
 //STAT1 is a general LED and indicates serial traffic
 #define STAT1  5 //On PORTD

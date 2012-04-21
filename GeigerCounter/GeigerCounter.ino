@@ -19,8 +19,12 @@ void incrementCount(void) {
 }
 
 void printCount(void) {
+  noInterrupts();
+  Serial.print(millis());
+  Serial.print(",");
   Serial.println(counts);
   counts = 0;
+  interrupts();
 }
 
 void setup() {
@@ -31,7 +35,7 @@ void setup() {
   Timer1.attachInterrupt(printCount);
   pinMode(LEDPin, OUTPUT);
   interrupts();
-  delay(1200);
+  delay(6000);
 }
 
 void loop() {
