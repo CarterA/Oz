@@ -25,11 +25,24 @@ int  ExternalTempSensor = 0;
 int  InternalTempSensor = 1;
 int  HIH4030Pin         = 0;
 long TempSensorDelay    = 94;
+volatile long counts = 0;
 
 // OneWire & Dallas Temperature Sensor setup
 OneWire oneWire(OneWireBus);
 DallasTemperature tempSensors(&oneWire);
 unsigned long tempDelay;
+
+void setupAccelerometer(void);
+void setupMagnetometer(void);
+void setupGyroscope(void);
+void setupTemperatureSensors(void);
+void setupBarometer(void);
+void writeAccelerometerData(void);
+void writeMagnetometerData(void);
+void writeGyroscopeData(void);
+void writeTemperatureData(void);
+void writeBarometerData(void);
+void writeHumidityData(void);
 
 void setup() {
   pinMode(LEDPin, OUTPUT);
@@ -44,6 +57,8 @@ void setup() {
   setupTemperatureSensors();
   setupBarometer();
   delay(1000);
+  attachInterrupt(INT1, incrementCount, RISING);
+  interrupts();
 }
 
 void loop() {
@@ -70,6 +85,12 @@ void loop() {
   
   Serial.print(",");
   writeHumidityData();
+  Serial.print(",");
+  
+  noInterrupts();
+  Serial.print(counts);
+  counts = 0;
+  interrupts();
   
   digitalWrite(LEDPin, LOW);
   
@@ -105,6 +126,10 @@ void setupTemperatureSensors() {
 
 void setupBarometer() {
   baro.begin();
+}
+
+void incrementCount(void) {
+  counts++;
 }
 
 void writeAccelerometerData() {
@@ -156,7 +181,6 @@ void writeBarometerData() {
 void writeHumidityData() {
   //float temp = tempSensors.getTempCByIndex(InternalTempSensor);
   int rawVal = analogRead(HIH4030Pin);
-  
   //  
   //  Here is how to calculate the actual %RH:
   //    float HIH4030Voltage = 3.3;
