@@ -45,7 +45,7 @@ void writeBarometerData() {
   float pressure = baro.readPressure();
   Serial.print(pressure);
   
-  if (!TakenAirSample /*&& pressure <= 3119.0*/) {
+  if (!TakenAirSample && pressure <= 3119.0) {
     collectAirSample();
     TakenAirSample = 1;
   }
