@@ -11,23 +11,25 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 # CSV file columns:
-# 0 , 1  , 2  , 3  , 4  , 5  , 6  , 7  , 8  , 9  , 10   , 11   , 12    , 13 , 14 , 15
-# ms,accX,accY,accZ,magX,magY,magZ,gyrX,gyrY,gyrZ,gyrTem,barTem,barPres,tem1,tem2,hum
+# 0 , 1  , 2  , 3  , 4  , 5  , 6  , 7  , 8  , 9  , 10   , 11   , 12    , 13 , 14 , 15,  16
+# ms,accX,accY,accZ,magX,magY,magZ,gyrX,gyrY,gyrZ,gyrTem,barTem,barPres,tem1,tem2,hum,geig
 
-f = csv.reader(open('Data/Flight.txt','r'))
-gf = csv.reader(open('Data/Geiger-Modified.txt', 'r'))
-data = [line for line in f if len(line) == 16]
+f = csv.reader(open('Data/Spring.txt','r'))
+# gf = csv.reader(open('Data/Geiger-Modified.txt', 'r'))
+data = [line for line in f if len(line) == 17]
 data = zip(*data)
-geigerData = [line for line in gf]
-geigerData = zip(*geigerData)
-geigerX = list()
-index = 0
-for line in geigerData[0]:
-    geigerX.insert(index, float(index + 1)/60)
-    index += 1
+# geigerData = [line for line in gf]
+# geigerData = zip(*geigerData)
+#geigerX = list()
+#index = 0
+#for line in geigerData[0]:
+#    geigerX.insert(index, float(index + 1)/60)
+#    index += 1
 
 # Convert ms to seconds for display purposes
+data[0] = range(0, len(data[0]) * 167, 167)
 data[0] = [float(t) / 60000 for t in data[0]]
+
 time_label = 'Time (minutes)'
 
 fig = plt.figure(facecolor='white')
@@ -36,8 +38,8 @@ fig = plt.figure(facecolor='white')
 temPlot = fig.add_subplot(221)
 temPlot.plot(data[0], data[10], 'b-', label='Gyroscope Temperature')
 temPlot.plot(data[0], data[11], 'g-', label='Barometer Temperature')
-temPlot.plot(data[0], data[13], 'r-', label='External Temperature')
-temPlot.plot(data[0], data[14], 'c-', label='Internal Temperature')
+#temPlot.plot(data[0], data[13], 'r-', label='External Temperature')
+#temPlot.plot(data[0], data[14], 'c-', label='Internal Temperature')
 #temPlot.legend()
 temPlot.set_title('Temperature')
 temPlot.set_xlabel(time_label)
@@ -71,21 +73,21 @@ for label in pressurePlot.get_yticklabels(): label.set_color('b')
 for label in altitudePlot.get_yticklabels(): label.set_color('r')
 
 # Geiger counter graph
-geigerPlot = fig.add_subplot(224)
-geigerPlot.plot(geigerX, geigerData[1])
-geigerPlot.set_title('Geiger Counter Readings')
-geigerPlot.set_xlabel(time_label)
-geigerPlot.set_ylabel('Counts per second')
+# = fig.add_subplot(224)
+#geigerPlot.plot(data[0], data[16])
+#geigerPlot.set_title('Geiger Counter Readings')
+#geigerPlot.set_xlabel(time_label)
+#geigerPlot.set_ylabel('Counts per second')
 
 # Accelerometer Graph
-#accPlot = fig.add_subplot(224)
-#accPlot.plot(data[0], data[1], 'b-', label='X Axis')
-#accPlot.plot(data[0], data[2], 'g-', label='Y Axis')
-#accPlot.plot(data[0], data[3], 'r-', label='Z Axis')
-#accPlot.legend()
-#accPlot.set_title('Acceleration')
-#accPlot.set_xlabel(time_label)
-#accPlot.set_ylabel('Accleration (G forces)')
+accPlot = fig.add_subplot(224)
+accPlot.plot(data[0], data[1], 'b-', label='X Axis')
+accPlot.plot(data[0], data[2], 'g-', label='Y Axis')
+accPlot.plot(data[0], data[3], 'r-', label='Z Axis')
+accPlot.legend()
+accPlot.set_title('Acceleration')
+accPlot.set_xlabel(time_label)
+accPlot.set_ylabel('Accleration (G forces)')
 
 plt.show()
 #from matplotlib.backends.backend_pdf import PdfPages
